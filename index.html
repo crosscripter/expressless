@@ -1,0 +1,11 @@
+<h1>Expressless</h1>
+<p>Enter a value and it will be doubled and updated from the server!</p>
+<input value='42'>
+<script>
+window.addEventListener('load', () => {
+	document.querySelector('input').addEventListener('change', async e => {
+		const res = await (await fetch('/double', { method: 'POST', body: JSON.stringify({ value: e.target.value })})).json()
+		e.target.value = res?.newValue
+	})
+})
+</script>
